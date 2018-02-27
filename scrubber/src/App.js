@@ -5,7 +5,7 @@ import PageHead from './components/PageHead';
 import Search from './components/Search';
 import Results from './components/Results';
 import Saved from './components/Saved';
-import API, { search, save, fetchSaved, deleteSaved} from './utils/API';
+import API from './utils/API';
 
 
 class App extends Component {

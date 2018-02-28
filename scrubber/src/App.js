@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react';
-import { Container, Row, Col, Header } from "./components/Grid";
+import { Segment, Header, Message } from 'semantic-ui-react';
 import PageHead from './components/PageHead';
 import Search from './components/Search';
 import Results from './components/Results';
 import Saved from './components/Saved';
-import API from './utils/API';
+import {search, save, fetchSaved, deleteSaved} from './utils/API';
 
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   searchNYT = (query, start, end) => {
-    API.search(query, start, end)
+    search(query, start, end)
       .then(res => {
         this.setState({ results: res })
       })
@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   getSaved = event => {
-    API.fetchSaved()
+    fetchSaved()
       .then(res => {
         this.setState({ saved: res })
       })
@@ -44,13 +44,13 @@ class App extends Component {
 
   handleSave = id => {
     const { article_id, title, url, date } = this.state.results.find(el => el.article_id === id)
-    API.save(article_id, title, url, date)
+    save(article_id, title, url, date)
       .then(res => this.getSaved())
       .catch(err => this.setState({ error: err.message }));
   }
 
   removeSaved = id => {
-    API.deleteSaved(id)
+    deleteSaved(id)
       .then(res => this.getSaved())
       .catch(err => this.setState({ error: err.message }));
   }
@@ -62,12 +62,12 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Container>
+      <Segment>
         <PageHead />
-        <Search handleFormSubmit={this.handleFormSubmit} handleInputChange={this.handleInputChange} />
-        <Results results={this.state.results} saved={this.state.saved} handleSave={this.handleSave} />
-        <Saved saved={this.state.saved} removeSaved={this.removeSaved} />
-      </Container>
+        <Search handleFormSubmit={"hello"/*this.handleFormSubmit*/} handleInputChange={this.handleInputChange} />
+        {/* <Results results={this.state.results} saved={this.state.saved} handleSave={this.handleSave} />
+        <Saved saved={this.state.saved} removeSaved={this.removeSaved} /> */}
+      </Segment>
       </div>
     );
   }

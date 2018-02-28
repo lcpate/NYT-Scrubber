@@ -28,7 +28,7 @@ class App extends Component {
   getSaved = event => {
     fetchSaved()
       .then(res => {
-        this.setState({ saved: res })
+      this.setState({  })
       })
       .catch(err => this.setState({ error: err.message }));
   }
@@ -65,8 +65,8 @@ class App extends Component {
       <Segment>
         <PageHead />
         <Search handleFormSubmit={"hello"/*this.handleFormSubmit*/} handleInputChange={this.handleInputChange} />
-        {/* <Results results={this.state.results} saved={this.state.saved} handleSave={this.handleSave} />
-        <Saved saved={this.state.saved} removeSaved={this.removeSaved} /> */}
+        <Results results={this.state.results} saved={this.state.saved} handleSave={this.handleSave} />
+        <Saved saved={this.state.saved} removeSaved={this.removeSaved} />
       </Segment>
       </div>
     );
